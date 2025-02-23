@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --margin: 1em;
+            --margin2: 0.4em;
+            --padding: 0.5em;
+            --background: #292929;
+            --background2: #424242;
+            --border-color: #747474;
+            --color: #e6e6e6;
+            --font: Comfortaa, Arial, Helvetica, sans-serif;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+
+        body{
+            height: calc(100vh);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            background-color: var(--background);
+            color: var(--color);
+            font-family: var(--font);
+            position: relative;
+        }
+        .input{
+            margin: var(--margin);
+            margin-bottom: 0;
+            display: inline-flex;
+            align-items: center;
+        }
+        input{
+            margin-right: var(--margin);
+            padding: var(--padding);
+            background-color: var(--background2);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            color: var(--color);
+            font-family: var(--font);
+        }
+        label{
+            margin: var(--margin2);
+        }
+        iframe{
+            width: calc(100% - 2 * var(--margin));
+            height: calc(100% - 2 * var(--margin));
+            margin: var(--margin);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+        }
+        .link{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="input">
+        <label for="url">url</label>
+        <input type="url" name="" id="url" autocomplete="off" value="https://osu.ppy.sh/teams/">
+        <label for="number">page</label>
+        <input type="number" name="" id="number" oninput="loadPage()">
+        <label for="newTab">open in new Tab</label>
+        <input type="checkbox" name="" id="newTab">
+    </div>
+    <iframe id="iframe" src="" frameborder="0"></iframe>
+    <a id="link" href="#" target="_blank" rel="noopener noreferrer"></a>
+    <script>
+        let number = document.getElementById('number');
+        let url = document.getElementById('url');
+        let newTab = document.getElementById('newTab');
+        let link = document.getElementById('link');
+        let iframe = document.getElementById('iframe');
+        function loadPage(){
+            iframe.src = url.value + number.value;
+            if(newTab.checked){
+                link.href = url.value + number.value;
+                link.click();
+            }
+        }
+        loadPage();
+    </script>
+</body>
+</html>
